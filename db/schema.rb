@@ -76,6 +76,22 @@ ActiveRecord::Schema.define(version: 20160403140953) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "troncon_route", force: :cascade do |t|
+    t.integer  "id_rte500"
+    t.string   "vocation"
+    t.string   "nb_chausse"
+    t.string   "nb_voies"
+    t.string   "etat"
+    t.string   "acces"
+    t.string   "res_vert"
+    t.string   "sens"
+    t.string   "res_europe"
+    t.string   "num_route"
+    t.string   "class_adm"
+    t.float    "longueur"
+    t.geometry "the_geom",   limit: {:srid=>0, :type=>"multi_line_string"}
+  end
+
   create_table "troncon_routes", force: :cascade do |t|
     t.string   "vocation"
     t.string   "nb_chausse"
@@ -88,14 +104,16 @@ ActiveRecord::Schema.define(version: 20160403140953) do
     t.string   "num_route"
     t.string   "class_adm"
     t.float    "longueur"
+    t.geometry "geometry",              limit: {:srid=>0, :type=>"multi_line_string"}
     t.integer  "route_id"
     t.integer  "point_repere_id"
     t.integer  "point_repere_final_id"
     t.integer  "point_repere_init_id"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",                                                           null: false
+    t.datetime "updated_at",                                                           null: false
   end
 
+  add_index "troncon_routes", ["geometry"], name: "index_troncon_routes_on_geometry", using: :gist
   add_index "troncon_routes", ["route_id", "created_at"], name: "index_troncon_routes_on_route_id_and_created_at", using: :btree
   add_index "troncon_routes", ["route_id"], name: "index_troncon_routes_on_route_id", using: :btree
 

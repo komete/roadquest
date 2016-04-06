@@ -1,5 +1,5 @@
 class TronconRoute < ActiveRecord::Base
-  self.rgeo_factory_generator = RGeo::Geos.factory_generator
+  #self.rgeo_factory_generator = RGeo::Geos.factory_generator()
 
   belongs_to :point_repere_init, :class_name => "PointRepere"
   belongs_to :point_repere_final, :class_name => "PointRepere"

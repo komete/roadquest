@@ -1,7 +1,6 @@
 require 'georuby'
 require 'geo_ruby/shp'
 require 'geo_ruby/shp4r/shp'
-require 'rgeo/shapefile'
 
 include GeoRuby::Shp4r
 include GeoRuby::SimpleFeatures
@@ -37,8 +36,8 @@ class DataController < ApplicationController
           ActiveRecord::Schema.add_column(table_name, field.name.downcase, shp_field_type(field.type))
         end
       end
-      ActiveRecord::Schema.add_column(table_name,"the_geom",shp_geom_type(shp.shp_type))
-      ActiveRecord::Schema.add_index(table_name,"the_geom",:spatial => true)
+      #ActiveRecord::Schema.add_column(table_name,"the_geom",shp_geom_type(shp.shp_type))
+      #ActiveRecord::Schema.add_index(table_name,"the_geom",:spatial => true)
 
       dataTable = Class.new(ActiveRecord::Base) do
         self.table_name = table_name
@@ -56,7 +55,7 @@ class DataController < ApplicationController
             shape_table_record[field.name.downcase] = donnees
           end
         end
-        shape_table_record.the_geom = shape.geometry
+        #shape_table_record.the_geom = shape.geometry
         shape_table_record.save
       end
     end

@@ -1,10 +1,3 @@
-require 'georuby'
-require 'geo_ruby/shp'
-require 'geo_ruby/shp4r/shp'
-
-include GeoRuby::Shp4r
-include GeoRuby::SimpleFeatures
-
 class TronconRoutesController < ApplicationController
   all_application_helpers
 
@@ -20,33 +13,29 @@ class TronconRoutesController < ApplicationController
     @shpfile = "/home/remi/shapes/" + params[:file]
     #@shpfile = "/Users/remiguillaume/Downloads/" + params[:file]
 
-    ShpFile.open(@shpfile) do |shp|
-      shp.each do |shape|
-        shp.fields.each do |field|
-          donnees = shape.data[field.name]
-          if donnees.is_a? String
-            params_import[field.name.downcase] = Iconv.conv('UTF-8', 'iso8859-1', donnees)
-          else
-            params_import[field.name.downcase] = donnees unless field.name.downcase=='id_rte500'
-          end
-        end
-t
-        num = params_import["num_route"]
+    factory = RGeo::Geographic.spherical_factory(:srid => 4326)
+    RGeo::Shapefile::Reader.open(@shpfile, :factory => factory) do |file|
+      file.each do |record|
+        # 1: Vérification de la route
+        num = record['NUM_ROUTE']
 
         if Route.exists?(num_route: num)
           @route = Route.find_by_num_route(num)
         else
           @route = Route.new(:num_route => num)
           @route.save
-
         end
 
-        @troncon_route = TronconRoute.new(:vocation=>params_import["vocation"],:nb_chausse=>params_import["nb_chausse"],
-        :nb_voies=>params_import["nb_voies"],:etat=>params_import["etat"],:acces=>params_import["acces"],:res_vert=>params_import["res_vert"],
-        :sens=>params_import["sens"],:res_europe=>params_import["res_europe"],:num_route=>params_import["num_route"],
-        :class_adm=>params_import["class_adm"],:longueur=>params_import["longueur"],:route_id=>@route.id)
+        @troncon_route = TronconRoute.new(:vocation=>Iconv.conv('UTF-8', 'iso8859-1', record["VOCATION"]),:nb_chausse=>Iconv.conv('UTF-8', 'iso8859-1', record["NB_CHAUSSE"]),
+                                          :nb_voies=>Iconv.conv('UTF-8', 'iso8859-1', record["NB_VOIES"]),:etat=>Iconv.conv('UTF-8', 'iso8859-1', record["ETAT"]),
+                                          :acces=>Iconv.conv('UTF-8', 'iso8859-1', record["ACCES"]),:res_vert=>Iconv.conv('UTF-8', 'iso8859-1', record["RES_VERT"]),
+                                          :sens=>Iconv.conv('UTF-8', 'iso8859-1', record["SENS"]),:res_europe=>Iconv.conv('UTF-8', 'iso8859-1', record["RES_EUROPE"]),
+                                          :num_route=>Iconv.conv('UTF-8', 'iso8859-1', record["NUM_ROUTE"]),
+                                          :class_adm=>Iconv.conv('UTF-8', 'iso8859-1', record["CLASS_ADM"]),:longueur=>record["LONGUEUR"],:route_id=>@route.id, :geometry => record.geometry)
         @troncon_route.save
       end
+      file.rewind
+      record = file.next
     end
     flash[:success] = "Données importées avec succès"
     redirect_to troncon_routes_path

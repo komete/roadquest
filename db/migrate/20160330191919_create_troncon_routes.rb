@@ -12,6 +12,7 @@ class CreateTronconRoutes < ActiveRecord::Migration
       t.string :num_route
       t.string :class_adm
       t.float :longueur
+      t.multi_line_string :geometry
       t.references :route, index: true, foreign_key: true
       t.references :point_repere, :point_repere_final
       t.references :point_repere,:point_repere_init
@@ -19,5 +20,6 @@ class CreateTronconRoutes < ActiveRecord::Migration
       t.timestamps null: false
     end
     add_index :troncon_routes, [:route_id, :created_at]
+    add_index :troncon_routes, :geometry, :using => :gist
   end
 end
