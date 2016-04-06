@@ -1,0 +1,12 @@
+<% if @work.errors.any? %>
+    <div id="error_explanation">
+      <div class="alert alert-danger">
+        Attention ! Les informations saisies ne sont pas correctes ...
+      </div>
+      <ul>
+        <% @work.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>

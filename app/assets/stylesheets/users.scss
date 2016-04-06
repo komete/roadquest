@@ -1,0 +1,76 @@
+body
+{
+  padding:0; margin:0;
+  background-color:#efefef;
+  font-family: 'PT Sans', sans-serif;
+}
+
+.floatl
+{
+  float:left;
+}
+.floatr
+{
+  float:right;
+}
+.clear
+{
+  clear:both;
+}
+
+.header
+{
+  width:100%;
+  height: 225px;
+  background-color:#EFEFEF;
+}
+.header .headerContent
+{
+  width:80%;
+  margin:0 auto;
+  line-height:100px;
+}
+.header .headerContent h1
+{
+  margin:0;
+  text-align: center;
+  color:#005ce6;
+  font-weight: bold;
+  padding-top: 25px;
+}
+
+.wrapper
+{
+  width:100%;
+}
+
+.content
+{
+  width:80%;
+  margin:-130px auto 0 auto;
+  background-color:#ffffff;
+  border:4px solid orangered;
+  padding:40px 20px;
+}
+
+.contact
+{
+  width:100%;
+}
+.contact_info
+{
+  width:57%; float:right; margin-left:3%;
+}
+
+
+
+.pageTitle{margin-bottom:50px;}
+
+.insert_contact_button{width: 100px; height: 50px; background-color:grey; color:#ffffff; border:none; margin-top:50px;}
+.cancel_contact_button
+{
+  width: 100px; height: 50px;
+  background-color:green; color:#ffffff;
+  border:none;
+  margin-top:50px;
+}

@@ -1,0 +1,50 @@
+<% provide(:title, 'Travaux') %>
+<section>
+  <div class="container">
+    <div class="page-header">
+      <div class="container center">
+        <h3 class="session">Liste des travaux</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <p id="notice"><%= notice %></p>
+
+        <table>
+          <thead>
+          <tr>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Debut</th>
+            <th>Fin</th>
+            <th>Itervenant</th>
+            <th colspan="3"></th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% @works.each do |work| %>
+              <tr>
+                <td><%= work.type_work %></td>
+                <td><%= work.description %></td>
+                <td><%= work.debut %></td>
+                <td><%= work.fin %></td>
+                <td><%= work.intervenant %></td>
+                <td><%= link_to 'Montrer', work %></td>
+                <td><%= link_to 'Éditer', edit_work_path(work) %></td>
+                <td><%= link_to 'Supprimer', work, method: :delete, data: { confirm: 'Êtes-vous sûr?' } %></td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+
+        <br>
+
+        <%= link_to 'Créer un nouveau travail', new_work_path %>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+

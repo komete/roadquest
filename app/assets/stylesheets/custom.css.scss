@@ -1,0 +1,83 @@
+@import "bootstrap";
+
+/* Main **/
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+}
+
+.center h1 {
+  margin-bottom: 10px;
+}
+html {
+  height: 100%;
+  overflow: hidden;
+}
+body {
+  height: 100%;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+  background-color: #EFEFEF;
+}
+.main-content {
+  display: table;
+  height: 100%;
+  table-layout: fixed;
+  width: 100%;
+}
+.header-menu {
+  background-color: white;
+}
+
+img {
+  padding-bottom: 5px;
+  height: 60px;
+  width: 60px;
+}
+/* Formulaires */
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+}
+input {
+  height: auto !important;
+}
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+  }
+}
+.checkbox {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  span {
+    margin-left: 20px;
+    font-weight: normal;
+  }
+}
+#session_remember_me {
+  width: auto;
+  margin-left: 0;
+}
+.session{
+  text-align: center;
+  color: #005ce6;
+  font-family: 'PT Sans', sans-serif;
+  font-weight: bold;
+}

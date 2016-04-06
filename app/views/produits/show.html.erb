@@ -1,0 +1,34 @@
+<% provide(:title, 'Produits') %>
+<section>
+  <div class="container">
+    <div class="page-header">
+      <div class="container center">
+        <h3 class="session">Visualisation</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+
+        <p id="notice"><%= notice %></p>
+
+        <p>
+          <strong>Nom:</strong>
+          <%= @produit.nom %>
+        </p>
+        <p>
+          <strong>Type de marquage:</strong>
+          <%= @produit.type_produit %>
+        </p>
+        <p>
+          <strong>Date d'expiration:</strong>
+          <%= @produit.expiration %>
+        </p>
+        <p>
+        <strong>Numéro de références:</strong>
+        <%= @produit.reference %>
+        </p>
+        <%= link_to 'Retour au marquage', @marquage %>
+      </div>
+    </div>
+  </div>
+</section>

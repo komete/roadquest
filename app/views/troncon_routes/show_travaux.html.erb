@@ -1,0 +1,47 @@
+<% provide(:title, 'Tronçons') %>
+<section>
+  <div class="container">
+    <div class="page-header">
+      <div class="container center">
+        <h3 class="session">Visualisation</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <% @troncon_route.works.each do |travaux| %>
+
+        <p>
+          <strong>Type de travail </strong>
+          <%= travaux.type_work %>
+        </p>
+
+        <p>
+          <strong>Déscription:</strong>
+          <%= travaux.description %>
+        </p>
+
+        <p>
+          <strong>Date de début:</strong>
+          <%= travaux.debut %>
+        </p>
+
+            <% if travaux.fin.nil? %>
+                <p>Travaux en cours !</p>
+            <% else %>
+                <p>
+                  <strong>Date de fin:</strong>
+                  <%= travaux.fin %>
+                </p>
+            <% end %>
+            <p>
+              <strong>Itervenant:</strong>
+              <%= travaux.intervenant %>
+            </p>
+            <br>
+        <% end %>
+        <%= link_to 'Retour', troncon_route_path %>
+      </div>
+    </div>
+  </div>
+</section>
+

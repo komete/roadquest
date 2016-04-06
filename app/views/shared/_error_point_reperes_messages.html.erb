@@ -1,0 +1,12 @@
+<% if @point_repere.errors.any? %>
+    <div id="error_explanation">
+      <div class="alert alert-danger">
+        Attention ! Les informations saisies ne sont pas correctes ...
+      </div>
+      <ul>
+        <% @point_repere.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>

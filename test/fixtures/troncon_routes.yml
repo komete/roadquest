@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id_rte500: 
+  vocation: MyString
+  nb_chausse: MyString
+  nb_voies: MyString
+  etat: MyString
+  acces: 
+  res_vert: MyString
+  sens: MyString
+  res_europe: MyString
+  num_route: MyString
+  class_adm: MyString
+  longueur: 1.5
+
+two:
+  id_rte500: 
+  vocation: MyString
+  nb_chausse: MyString
+  nb_voies: MyString
+  etat: MyString
+  acces: 
+  res_vert: MyString
+  sens: MyString
+  res_europe: MyString
+  num_route: MyString
+  class_adm: MyString
+  longueur: 1.5

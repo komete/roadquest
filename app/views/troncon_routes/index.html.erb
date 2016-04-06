@@ -1,0 +1,57 @@
+<% provide(:title, 'Tronçons') %>
+<div class="container">
+  <div class="wrapper">
+    <!-- header section -->
+    <header class="header">
+      <div class="headerContent">
+      </div>
+    </header>
+  </div>
+  <div class="content">
+    <div class="clear"></div>
+    <h2 align="center">Liste des tronçons</h2>
+    <hr class="pageTitle">
+    <table id="example" class="table table-striped table-bordered" cellspacing="0" width="110%">
+      <thead>
+      <tr>
+        <th>Nb chausse</th>
+        <th>Nb voies</th>
+        <th>Etat</th>
+        <th>Sens</th>
+        <th>Num route</th>
+        <th>Longueur</th>
+        <th>Visualiser</th>
+      </tr>
+      </thead>
+      <tfoot>
+      <tr>
+        <th>Nb chausse</th>
+        <th>Nb voies</th>
+        <th>Etat</th>
+        <th>Sens</th>
+        <th>Num route</th>
+        <th>Longueur</th>
+        <th>Visualiser</th>
+      </tr>
+      </tfoot>
+      <tbody align="center">
+      <% @troncon_routes.each do |troncon_route| %>
+          <tr>
+            <td><%= troncon_route.nb_chausse %></td>
+            <td><%= troncon_route.nb_voies %></td>
+            <td><%= troncon_route.etat %></td>
+            <td><%= troncon_route.sens %></td>
+            <td><%= troncon_route.num_route %></td>
+            <td><%= troncon_route.longueur %></td>
+            <td><%= link_to 'Montrer', troncon_route %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#example').DataTable();
+  });
+</script>

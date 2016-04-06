@@ -1,0 +1,35 @@
+<% provide(:title, 'Repères') %>
+<section>
+  <div class="container">
+    <div class="page-header">
+      <div class="container center">
+        <h3 class="session">Visualisation</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+
+        <p id="notice"><%= notice %></p>
+
+        <p>
+          <strong>Latitude:</strong>
+          <%= @point_repere.latitude %>
+        </p>
+
+        <p>
+          <strong>Longitude:</strong>
+          <%= @point_repere.longitude %>
+        </p>
+
+        <p>
+          <strong>Projection:</strong>
+          <%= @point_repere.projection %>
+        </p>
+
+        <%= link_to 'Éditer', edit_point_repere_path(@point_repere) %> |
+        <%= link_to 'Retour', point_reperes_path %>
+      </div>
+    </div>
+  </div>
+</section>
+

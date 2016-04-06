@@ -1,0 +1,33 @@
+<% provide(:title, 'Login') %>
+<section>
+  <div class="container">
+    <div class="page-header">
+      <div class="container center">
+        <h3 class="session">Se connecter</h3>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <%= form_for(:session, url: login_path) do |f| %>
+
+            <%= f.label 'Nom d\'utilisateur' %>
+            <%= f.text_field :username, class: 'form-control' %>
+
+            <%= f.label 'Mot de passe' %>
+            <%= link_to " Mot de passe oublié ?", new_password_reset_path%>
+            <%= f.password_field :password, class: 'form-control' %>
+
+            <%= f.label :remember_me, class: "checkbox inline" do %>
+                <%= f.check_box :remember_me %>
+                <span>Se souvenir de moi</span>
+            <% end %>
+
+            <%= f.submit "Connexion", class: "btn btn-primary" %>
+        <% end %>
+
+        <p>Pas de compte ? <%= link_to "Création de compte", signup_path %></p>
+      </div>
+    </div>
+  </div>
+</section>

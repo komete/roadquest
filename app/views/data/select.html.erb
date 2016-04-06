@@ -1,0 +1,21 @@
+<% provide(:title, 'Importation') %>
+<section>
+  <div class="container">
+    <div class="page-header">
+      <div class="container center">
+        <h3 class="session">Importation de données</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <%= form_tag("/data/import", method: "post") do %>
+
+            <%= label_tag("Fichier") %>
+            <%= file_field_tag(:file, class: 'form-control') %>
+
+            <%= submit_tag("Importer données", class: "btn btn-primary" )%>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

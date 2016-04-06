@@ -1,0 +1,45 @@
+<% provide(:title, 'Marquages') %>
+<section>
+  <div class="container">
+    <div class="page-header">
+      <div class="container center">
+        <h3 class="session">Visualisation</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+
+        <p id="notice"><%= notice %></p>
+
+        <p>
+          <strong>Type de marquage:</strong>
+          <%= @marquage.type_marquage %>
+        </p>
+        <p>
+          <strong>Couleur:</strong>
+          <%= @marquage.couleur %>
+        </p>
+        <p>
+          <strong>Largeur de bande:</strong>
+          <%= @marquage.largeur_bande%>
+        </p>
+        <br>
+        <h4>Liste des produits</h4>
+        <% @m.produits.each do |produit| %>
+            <p><strong>Nom:</strong>
+              <%= produit.nom %>
+            </p>
+            <p><strong>Type:</strong>
+              <%= produit.type_produit %>
+            </p>
+            <p><strong>Date d'expiration:</strong>
+              <%= produit.expiration %>
+            </p>
+        <% end %>
+        <br>
+        <%= link_to 'Ajouter un produit', {controller: "produits", action: "new", id: @marquage.id} %> |
+        <%= link_to 'Retour travail en cours', @work %>
+      </div>
+    </div>
+  </div>
+</section>

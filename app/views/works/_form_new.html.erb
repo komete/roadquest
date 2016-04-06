@@ -1,0 +1,27 @@
+<%= form_for(@work) do |f| %>
+
+    <%= render 'shared/error_works_messages' %>
+
+    <div class="field">
+      <%= f.label 'Type' %><br>
+      <%= f.text_field :type_work, class: 'form-control' %>
+    </div>
+    <div class="field">
+      <%= f.label 'Déscription' %><br>
+      <%= f.text_area :description, class: 'form-control' %>
+    </div>
+    <div class="field">
+      <%= f.label 'Date de début' %><br>
+      <%= f.date_select :debut, class: 'form-control' %>
+    </div>
+    <div class="field">
+      <%= f.label :intervenant %><br>
+      <%= f.text_field :intervenant, class: 'form-control' %>
+    </div>
+    <%= hidden_field_tag(:troncon_id, @id) %>
+    <div class="actions">
+      <%= f.submit "Créer", class: 'btn btn-primary' %>
+    </div>
+<% end %>
+
+

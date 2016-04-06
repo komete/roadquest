@@ -1,0 +1,3 @@
+L'utilisateur: <%= @user.nom %> , vient de créer un compte à: <%= @user.created_at %>
+
+<%= edit_account_verification_url(@user.verification_token, email: @user.email) %>

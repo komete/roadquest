@@ -1,0 +1,49 @@
+<script>
+  function form_marquage() {
+    var m = document.getElementById("marquage_type_marquage");
+    var t = m.options[m.selectedIndex].value;
+    console.log(t);
+    if(t === 'lineaires') {
+      var div1 = document.getElementById("lineaire");
+      div1.style.display = "block";
+      var div2 = document.getElementsByClassName("specialise")
+      div2[0].style.display = "none";
+      div2[1].style.display = "none";
+    }else{
+      var div1 = document.getElementById("lineaire");
+      div1.style.display = "none";
+      var div2 = document.getElementsByClassName("specialise")
+      div2[0].style.display = "block";
+      div2[1].style.display = "block";
+    }
+  }
+</script>
+<%= form_for(@marquage) do |f| %>
+
+    <%= render 'shared/error_marquages_messages' %>
+
+    <div class="field">
+      <%= f.label :type_marquage %><br>
+      <%= f.select(:type_marquage, options_for_select([['linéaires', 'lineaires'], ['spécialisés','specialises']]), {},{:class => 'form-control',:onchange => 'form_marquage();', :onclick => 'form_marquage();'}) %>
+    </div>
+    <div class="field">
+      <%= f.label 'Couleur' %><br>
+      <%= f.text_field :couleur, class: 'form-control' %>
+    </div>
+    <div id="lineaire" class="field" style="display: block">
+      <%= label_tag('Largeur de bande') %><br>
+      <%= text_field(:marquage_lineaire, :largeur_bande, class: 'form-control') %>
+    </div>
+    <div class="specialise" class="field" style="display: none">
+      <%= label_tag('Type de travaux') %><br>
+      <%= text_field(:marquage_specialise, :type_travaux, class: 'form-control') %>
+    </div>
+    <div  class="specialise" class="field" style="display: none">
+      <%= label_tag('Dimensions') %><br>
+      <%= text_field(:marquage_specialise, :dimension, class: 'form-control') %>
+    </div>
+    <%= hidden_field_tag :work_id, @id %>
+    <div class="actions">
+      <%= f.submit "Créer", class: 'btn btn-primary' %>
+    </div>
+<% end %>

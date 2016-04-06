@@ -1,0 +1,37 @@
+
+remi:
+  nom: GUILLAUME
+  prenom: Remi
+  email: remi.guillaume.montreal@gmail.com
+  poste: 1
+  codeEmploye: GUIR23078602
+  telephone: 438-876-0843
+  password_digest: <%= User.encrypt_content('admin1') %>
+  administrateur: true
+  verified: true
+  verified_at: <%= Time.zone.now %>
+
+
+faycal:
+  nom: SAWADOGO
+  prenom: Fayçal
+  email: faycalsawadogo@gmail.com
+  poste: 1
+  codeEmploye: SAWA23098900
+  telephone: 438-935-8129
+  password_digest: <%= User.encrypt_content('admin2') %>
+  administrateur: true
+  verified: true
+  verified_at: <%= Time.zone.now %>
+
+stephanie:
+  nom: BRIEN-LEJEUNE
+  prenom: Stéphanie
+  email: stephanielejeune41@gmail.com
+  poste: 1
+  codeEmploye: BRIS01579306
+  telephone: 514-218-7720
+  password_digest: <%= User.encrypt_content('admin3') %>
+  administrateur: true
+  verified: true
+  verified_at: <%= Time.zone.now %>

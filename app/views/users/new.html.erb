@@ -1,0 +1,67 @@
+<% provide(:title, 'Sign up') %>
+<section>
+  <div class="container">
+    <div class="page-header">
+      <div class="container center">
+        <h3 class="session">Création du compte utilisateur</h3>
+      </div>
+    </div>
+    <script>
+      function form_user() {
+        var m = document.getElementById("user_poste");
+        var t = m.options[m.selectedIndex].value;
+        console.log(t);
+        if(t == 5) {
+          var div1 = document.getElementById("entrepreneur");
+          div1.style.display = "block";
+        }else{
+          var div1 = document.getElementById("entrepreneur");
+          div1.style.display = "none";
+        }
+      }
+    </script>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <%= form_for(@user) do |f| %>
+
+            <%= render 'shared/error_users_messages' %>
+
+            <%= f.label "Nom" %>
+            <%= f.text_field :nom, class: 'form-control' %>
+
+            <%= f.label "Prénom" %>
+            <%= f.text_field :prenom, class: 'form-control' %>
+
+            <%= f.label "Courriel" %>
+            <%= f.text_field :email, class: 'form-control' %>
+
+            <%= f.label "Nom d'utilisateur" %>
+            <%= f.text_field :username, class: 'form-control' %>
+
+            <%= f.label "Poste" %>
+            <%= f.select(:poste, options_for_select([['Cadre', 1], ['Analyste', 2], ['Technicien', 3], ['Fournisseur', 4], ['Entrepreneur', 5]]),{},
+                         {:class => 'form-control',:onchange => 'form_user();', :onclick => 'form_user();'}) %>
+
+            <%= f.label "Code employé" %>
+            <%= f.text_field :codeEmploye, class: 'form-control' %>
+
+            <%= f.label "Numéro de téléphone" %>
+            <%= f.text_field :telephone, class: 'form-control' %>
+
+            <div id="entrepreneur" class="field" style="display: none">
+              <%= label_tag('Référence d\'entreprise') %><br>
+              <%= text_field(:ref_entreprise, :ref_entreprise, class: 'form-control') %>
+            </div>
+
+            <%= f.label :password %>
+            <%= f.password_field :password, class: 'form-control' %>
+
+            <%= f.label :password_confirmation, "Confirmation" %>
+            <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+            <%= f.submit "Créer compte", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

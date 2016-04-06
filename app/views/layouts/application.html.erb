@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= full_title(yield(:title)) %></title>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic' %>
+  <%= stylesheet_link_tag 'font-awesome.min.css' %>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/t/dt/jq-2.2.0,dt-1.10.11/datatables.min.css"/>
+  <script type="text/javascript" src="https://cdn.datatables.net/t/dt/jq-2.2.0,dt-1.10.11/datatables.min.js"></script>
+  <%= csrf_meta_tags %>
+  <%= favicon_link_tag 'logo.JPG.ico' %>
+</head>
+<body>
+<div class="main-content">
+  <%= render 'layouts/nav' %>
+
+  <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>"><%= message %></div>
+  <% end %>
+
+  <%= yield %>
+
+  <%= render 'layouts/footer' %>
+</div>
+</body>
+</html>

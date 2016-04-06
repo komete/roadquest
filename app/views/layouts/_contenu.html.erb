@@ -1,0 +1,51 @@
+<!-- Page Content -->
+<section class="carousel">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-lg-8 col-sm-8">
+        <div class="w3-content w3-section" >
+          <%= link_to image_tag('map.png', :class => ' mySlides photo') %>
+          <%= link_to image_tag('road.jpg', :class => ' mySlides photo') %>
+          <%= link_to image_tag('road-sign.jpg', :class => ' mySlides photo') %>
+          <%= link_to image_tag('route.jpg', :class => ' mySlides photo') %>
+          <%= link_to image_tag('autoroute.jpg', :class => ' mySlides photo') %>
+
+        </div>
+      </div>
+
+      <div class="col-md-12 col-lg-4 col-sm-4 description">
+        <h2 class="bienvenue">Bienvenue sur RoadQuest</h2>
+        <p> <strong>RoadQuest</strong> est un logiciel qui vise à répertorier efficacement le patrimoine routier d'un département,
+          d'une région, d'une province ou bien encore d'un pays. L'objectif étant de fournir un accès simple et
+          rapide à toutes les informations techniques reliées aux routes pour permettre par la suite de les éditer et de les mettre à jour via des supports mobiles tel que : les tablettes tactiles,ordinateurs portables, téléphones intelligents, etc. Les points forts de ce logiciel résidents dans ses modules de cartographie et de production de rapport qui vont donner une vue d'ensemble des données ainsi que leurs données du sens vis à vis de problématiques. Par conséquent il permettra,
+          la production de cartes interactives.
+        </p>
+        <h3>Services offerts</h3>
+        <ul>
+          <li>Produire un rapport</li>
+          <li>Archive numérique</li>
+          <li>Faire une recherche</li>
+          <li>Créer des cartes</li>
+        </ul>
+      </div>
+    </div>
+    <!-- /.row -->
+  </div>
+</section>
+<script type="text/javascript">
+  var myIndex = 0;
+  carousel();
+
+  function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    myIndex++;
+    if (myIndex > x.length) {myIndex = 1}
+    x[myIndex-1].style.display = "block";
+    setTimeout(carousel, 8000);
+  }
+</script>

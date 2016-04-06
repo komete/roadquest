@@ -1,0 +1,71 @@
+<% provide(:title, 'Tronçons') %>
+<section>
+  <div class="container">
+    <div class="page-header">
+      <div class="container center">
+        <h3 class="session">Visualisation</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+
+
+        <p>
+          <strong>Vocation:</strong>
+          <%= @troncon_route.vocation %>
+        </p>
+
+        <p>
+          <strong>Nombre de chaussés:</strong>
+          <%= @troncon_route.nb_chausse %>
+        </p>
+
+        <p>
+          <strong>Nombre de voies:</strong>
+          <%= @troncon_route.nb_voies %>
+        </p>
+
+        <p>
+          <strong>État:</strong>
+          <%= @troncon_route.etat %>
+        </p>
+
+        <p>
+          <strong>Acces:</strong>
+          <%= @troncon_route.acces %>
+        </p>
+
+        <p>
+          <strong>Réseau vert:</strong>
+          <%= @troncon_route.res_vert %>
+        </p>
+
+        <p>
+          <strong>Sens:</strong>
+          <%= @troncon_route.sens %>
+        </p>
+
+        <p>
+          <strong>Réseau europe:</strong>
+          <%= @troncon_route.res_europe %>
+        </p>
+
+        <p>
+          <strong>Numéro de route:</strong>
+          <%= @troncon_route.num_route %>
+        </p>
+
+        <p>
+          <strong>Classe administrative:</strong>
+          <%= @troncon_route.class_adm %>
+        </p>
+
+        <p>
+          <strong>Longueur:</strong>
+          <%= @troncon_route.longueur %>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+

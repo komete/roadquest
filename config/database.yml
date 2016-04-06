@@ -1,0 +1,27 @@
+
+default: &default
+  adapter: postgis
+  postgis_extension: postgis
+  encoding: utf8
+  pool: 15
+  host: localhost
+  port: 5433
+  username: roadquest
+  password: roadquest
+
+development:
+  <<: *default
+  schema_search_path: public, postgis
+  database: roadquest_development
+
+test:
+  <<: *default
+  schema_search_path: public, postgis
+  database: roadquest_test
+
+production:
+  <<: *default
+  schema_search_path: '"$user", public, postgis'
+  database: roadquest_production
+  #username: roadquest
+  #password: <%= ENV['ROADQUEST_DATABASE_PASSWORD'] %>

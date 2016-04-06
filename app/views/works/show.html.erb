@@ -1,0 +1,60 @@
+<% provide(:title, 'Travaux') %>
+<section>
+  <div class="container">
+    <div class="page-header">
+      <div class="container center">
+        <h3 class="session">Visualisation</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+
+        <p id="notice"><%= notice %></p>
+
+        <p>
+          <strong>Type:</strong>
+          <%= @work.type_work %>
+        </p>
+
+        <p>
+          <strong>Description:</strong>
+          <%= @work.description %>
+        </p>
+
+        <p>
+          <strong>Debut:</strong>
+          <%= @work.debut %>
+        </p>
+        <% if @work.fin.nil? %>
+            <p>Travaux en cours !</p>
+        <% else %>
+          <p>
+            <strong>Fin:</strong>
+            <%= @work.fin %>
+          </p>
+        <% end %>
+        <p>
+          <strong>Itervenant:</strong>
+          <%= @work.intervenant %>
+        </p>
+        <br>
+        <h4> Liste des marquages</h4>
+        <% @work.marquages.each do |marquage| %>
+            <p>
+              <strong>Type de marquage:</strong>
+              <%= marquage.type_marquage %>
+            </p>
+            <p>
+              <strong>Couleur:</strong>
+              <%= marquage.couleur %>
+            </p>
+        <% end %>
+        <br>
+        <%= link_to 'Ajouter marquage',{controller: 'marquages', action: 'new', id: @work}%> |
+        <%= link_to 'Éditer', edit_work_path(@work) %> |
+        <%= link_to 'Retour', works_path %> |
+        <%= link_to 'Retour au tronçon',{controller: 'troncon_routes', action: 'show_travaux', id: @troncon} %>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,2 @@
+module MarquagesHelper
+end

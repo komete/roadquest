@@ -1,0 +1,7 @@
+<% provide(:title, 'Dashboard') %>
+
+<h1 class="center"> Admin</h1>
+
+<% if logged_admin %>
+    <%= link_to "Gestion des utilisateurs", users_gestion_path%>
+<% end %>

@@ -1,0 +1,25 @@
+<%= form_for(@produit) do |f| %>
+
+    <%= render 'shared/error_produits_messages' %>
+
+    <div class="field">
+      <%= f.label 'Nom' %><br>
+      <%= f.text_field :nom, class: 'form-control' %>
+    </div>
+    <div class="field">
+      <%= f.label 'Type de produit' %><br>
+      <%= f.text_field :type_produit, class: 'form-control' %>
+    </div>
+    <div class="field">
+      <%= f.label 'Date d\'expiration' %><br>
+      <%= f.date_select :expiration, class: 'form-control' %>
+    </div>
+    <div class="field">
+      <%= f.label 'Référence' %><br>
+      <%= f.text_field :reference, class: 'form-control' %>
+    </div>
+    <%= hidden_field_tag :marquage_id, @id %>
+    <div class="actions">
+      <%= f.submit "Créer", class: 'btn btn-primary' %>
+    </div>
+<% end %>

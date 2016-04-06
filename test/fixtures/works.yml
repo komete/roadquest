@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  description: MyText
+  debut: 2016-03-30 15:59:55
+  fin: 2016-03-30 15:59:55
+  itervenant: MyString
+
+two:
+  type: 
+  description: MyText
+  debut: 2016-03-30 15:59:55
+  fin: 2016-03-30 15:59:55
+  itervenant: MyString

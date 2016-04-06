@@ -1,0 +1,20 @@
+<%= form_for(@point_repere) do |f| %>
+
+  <%= render 'shared/error_point_reperes_messages' %>
+
+  <div class="field">
+    <%= f.label :latitude %><br>
+    <%= f.text_field :latitude %>
+  </div>
+  <div class="field">
+    <%= f.label :longitude %><br>
+    <%= f.text_field :longitude %>
+  </div>
+  <div class="field">
+    <%= f.label :projection %><br>
+    <%= f.text_field :projection %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

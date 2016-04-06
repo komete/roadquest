@@ -1,0 +1,21 @@
+<div id='cssmenu'>
+  <ul>
+    <li><%= link_to "RoadQuest", acceuil_path %></li>
+    <li><%= link_to "À propos", acceuil_path %></li>
+    <li><%= link_to "Services", recherches_path %></li>
+    <li><%= link_to "Contact", acceuil_path%></li>
+    <li><%= link_to "Faire une recherche", troncon_routes_path %></li>
+
+    <% if logged_in? %>
+        <li><%= link_to "Se déconnecter", logout_path, method: :delete %></li>
+    <% else %>
+        <li><%= link_to "Se connecter", login_path %></li>
+        <li><%= link_to "Créer un compte", signup_path %></li>
+    <% end %>
+
+    <% if logged_in? %>
+        <% @user = current_user%>
+      <li><%=link_to ""+@user.nom+" "+@user.prenom, edit_user_path(@user) %></li>
+    <% end %>
+  </ul>
+</div>
