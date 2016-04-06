@@ -1,1 +1,22 @@
 <h3 class="center"> ICI on fait des cartes :).</h3>
+
+<div id="map">
+  
+</div>
+<script type="application/javascript">
+  (function($) {
+    var mapOptions = {
+      zoom: 1,
+      mapTypeControlOptions: {mapTypeIds:
+          [google.maps.MapTypeId.ROADMAP]}
+    };
+
+    var mapElement = document.getElementById('map');
+    map = new google.maps.Map(mapElement, mapOptions);
+    map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+
+
+    map.data.loadGeoJson("troncons.json");
+
+  })( jQuery );
+</script>

@@ -58,7 +58,23 @@ class TronconRoutesController < ApplicationController
 
   end
 
+  def json_template
+    troncons = TronconRoute.first
+    factory = RGeo::GeoJSON::EntityFactory.instance
+    feature = factory.feature troncons.geometry
+    hash = RGeo::GeoJSON.encode feature
+    puts hash.to_json
+    File.open('troncons.json', 'w') {|file| file.write hash.to_json}
+    redirect_to troncon_routes_path
+  end
+
   :private
+
+  def to_feature_collection models
+    factory = RGeo::GeoJSON::EntityFactory.instance
+    features = models.map(&:to_feature)
+    factory.feature_collection features
+  end
 
   def set_troncon_route
     @troncon_route = TronconRoute.find(params[:id])

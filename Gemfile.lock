@@ -195,6 +195,8 @@ GEM
     rgeo-activerecord (4.0.5)
       activerecord (~> 4.2)
       rgeo (~> 0.3)
+    rgeo-geojson (0.4.3)
+      rgeo (~> 0.5)
     rgeo-shapefile (0.4.1)
       dbf (~> 3.0)
       rgeo (~> 0.3)
@@ -272,6 +274,7 @@ DEPENDENCIES
   rails_12factor (= 0.0.2)
   react-rails (~> 1.6.0)
   rgeo
+  rgeo-geojson
   rgeo-shapefile
   sass-rails (= 5.0.2)
   sdoc (= 0.4.0)

@@ -23,6 +23,7 @@ gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 gem 'rgeo'
 gem 'rgeo-shapefile'
+gem 'rgeo-geojson'
 gem 'activerecord-postgis-adapter'
 
 gem 'pg'
