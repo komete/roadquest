@@ -9,9 +9,8 @@ class TronconRoutesController < ApplicationController
   end
 
   def import
-    params_import = Hash.new
-    @shpfile = "/home/remi/shapes/" + params[:file]
-    #@shpfile = "/Users/remiguillaume/Downloads/" + params[:file]
+    #@shpfile = "/home/remi/shapes/" + params[:file]
+    @shpfile = "/Users/remiguillaume/Downloads/" + params[:file]
 
     factory = RGeo::Geographic.spherical_factory(:srid => 4326)
     RGeo::Shapefile::Reader.open(@shpfile, :factory => factory) do |file|
@@ -43,6 +42,15 @@ class TronconRoutesController < ApplicationController
 
   def index
     @troncon_routes = TronconRoute.all
+    respond_to do |format|
+      format.html
+      format.json do
+        troncons = TronconRoute.first
+        factory = RGeo::GeoJSON::EntityFactory.instance
+        feature = factory.feature troncons.geometry
+        render json: RGeo::GeoJSON.encode(feature)
+      end
+    end
   end
 
   def show
@@ -63,18 +71,12 @@ class TronconRoutesController < ApplicationController
     factory = RGeo::GeoJSON::EntityFactory.instance
     feature = factory.feature troncons.geometry
     hash = RGeo::GeoJSON.encode feature
-    puts hash.to_json
+    #hash = RGeo::GeoJSON.encode troncons.geometry
     File.open('troncons.json', 'w') {|file| file.write hash.to_json}
     redirect_to troncon_routes_path
   end
 
   :private
-
-  def to_feature_collection models
-    factory = RGeo::GeoJSON::EntityFactory.instance
-    features = models.map(&:to_feature)
-    factory.feature_collection features
-  end
 
   def set_troncon_route
     @troncon_route = TronconRoute.find(params[:id])
