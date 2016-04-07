@@ -45,9 +45,15 @@ class TronconRoutesController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        troncons = TronconRoute.first
+        troncon = TronconRoute.first
+        troncons = TronconRoute.all
         factory = RGeo::GeoJSON::EntityFactory.instance
-        feature = factory.feature troncons.geometry
+        features = troncons.map{ |t| factory.feature(t)}
+        #features = troncons.map(&:to_feature)
+        feature_collection = factory.feature_collection features
+
+        feature = factory.feature troncon.geometry
+        #render json: RGeo::GeoJSON.encode(feature_collection)
         render json: RGeo::GeoJSON.encode(feature)
       end
     end

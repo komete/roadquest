@@ -456,3 +456,6 @@
 .ref{
     padding-left: 10px;
 }
+#map {
+    border: 1px solid black;
+}
