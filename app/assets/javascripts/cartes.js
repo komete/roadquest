@@ -1,21 +1,3 @@
-/*handler = Gmaps.build('Google');
- handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
- //markers = handler.addMarkers(<%=raw @hash.to_json %>);
- markers = handler.addMarkers([
- {
- "lat": 0,
- "lng": 0,
- "picture": {
- "url": "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png",
- "width":  32,
- "height": 32
- },
- "infowindow": "hello!"
- }
- ]);
- handler.bounds.extendWith(markers);
- handler.fitMapToBounds();
- });*/
 var geojsonObject = {
     'type': 'FeatureCollection',
     'crs': {
@@ -86,10 +68,8 @@ var geojsonObject = {
         }
     }]
 };
-var geoJsonLayout;
-
-$.getJSON('troncon_routes.json', function(data) {
-    geoJsonLayout = data;
+var geoJsonLayout = $.getJSON('troncon_routes.json', function (data) {
+    return data;
 });
 var vectorSource = new ol.source.Vector({
     features: (new ol.format.GeoJSON()).readFeatures(geoJsonLayout)
@@ -97,78 +77,34 @@ var vectorSource = new ol.source.Vector({
 var vectorLayer = new ol.layer.Vector({
     source: vectorSource
 });
+
+var mapquest = new ol.layer.Tile({
+    source: new ol.source.MapQuest({layer: 'osm'}),
+    visible: true,
+    name: 'mapquest'
+});
+/* Vue */
+var vue = new ol.View({
+    center: [0, 0],
+    zoom: 3,
+    maxZoom: 18,
+    minZoom: 2
+});
+/* Carte */
 var map = new ol.Map({
     projection: new ol.proj.Projection("EPSG:3857"),
     displayProjection: new ol.proj.Projection("EPSG:3857"),
+    renderer: 'canvas',
     layers: [
-        new ol.layer.Tile({
-            source: new ol.source.MapQuest({layer: 'osm'})
-        }),
+        mapquest,
         vectorLayer
     ],
     target: 'map',
     controls: ol.control.defaults({
-        attributionOptions:({
+        attributionOptions: ({
             collapsible: false
         })
     }),
-    view: new ol.View({
-        center: [0, 0],
-        zoom: 3
-    })
+    view: vue
 });
-/*
- var gmap = new google.maps.Map(document.getElementById('gmap'), {
- disableDefaultUI: true,
- keyboardShortcuts: false,
- draggable: false,
- disableDoubleClickZoom: true,
- scrollwheel: false,
- streetViewControl: false
- });
 
- var view = new ol.View({
- // make sure the view doesn't go beyond the 22 zoom levels of Google Maps
- maxZoom: 21
- });
- view.on('change:center', function() {
- var center = ol.proj.transform(view.getCenter(), 'EPSG:3857', 'EPSG:4326');
- gmap.setCenter(new google.maps.LatLng(center[1], center[0]));
- });
- view.on('change:resolution', function() {
- gmap.setZoom(view.getZoom());
- });
-
- var vector = new ol.layer.Vector({
- source: new ol.source.TileJSON({
- url: 'https://raw.githubusercontent.com/glynnbird/countriesgeojson/master/france.geojson',
- projection: 'EPSG:3857'
- }),
- style: new ol.style.Style({
- fill: new ol.style.Fill({
- color: 'rgba(255, 255, 255, 0.6)'
- }),
- stroke: new ol.style.Stroke({
- color: '#319FD3',
- width: 1
- })
- })
- });
-
- var olMapDiv = document.getElementById('olmap');
- var map = new ol.Map({
- layers: [vector],
- interactions: ol.interaction.defaults({
- altShiftDragRotate: false,
- dragPan: false,
- rotate: false
- }).extend([new ol.interaction.DragPan({kinetic: null})]),
- target: olMapDiv,
- view: view
- });
- view.setCenter([0, 0]);
- view.setZoom(1);
-
- olMapDiv.parentNode.removeChild(olMapDiv);
- gmap.controls[google.maps.ControlPosition.TOP_LEFT].push(olMapDiv);
- */

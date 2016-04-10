@@ -1,3 +1,4 @@
+# Database config.
 
 default: &default
   adapter: postgis
