@@ -80,11 +80,9 @@ GEM
     frontend-generators (0.1.1)
       rainbow (= 2.0.0)
       turf (= 0.0.5)
-    geocoder (1.3.1)
     georuby (2.5.2)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
-    gmaps4rails (2.1.2)
     guard (2.13.0)
       formatador (>= 0.2.4)
       listen (>= 2.7, <= 4.0)
@@ -256,9 +254,7 @@ DEPENDENCIES
   coffee-rails (= 4.1.0)
   dbf (= 3.0.5)
   frontend-generators
-  geocoder (= 1.3.1)
   georuby (= 2.5.2)
-  gmaps4rails (= 2.1.2)
   guard-minitest (= 2.3.1)
   iconv
   jbuilder (= 2.2.3)

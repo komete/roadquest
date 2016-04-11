@@ -5,11 +5,27 @@
 //= require react
 //= require react_ujs
 //= require components
-//= require underscore
-//= require gmaps/google
 //= require_tree .
 
 ( function( $ ) {
+
+    var myIndex = 0;
+
+    function carousel() {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        if(x != null ) {
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            myIndex++;
+            if (myIndex > x.length) {myIndex = 1}
+            if(x[myIndex-1] != null) {x[myIndex-1].style.display = "block";}
+            setTimeout(carousel, 8000);
+        }
+
+    }
+
     $( document ).ready(function() {
         $('#cssmenu').prepend('<div id="menu-button">RoadQuest</div>');
         $('#cssmenu #menu-button').on('click', function(){
@@ -21,21 +37,7 @@
                 menu.addClass('open');
             }
         });
+        carousel();
     });
-    var myIndex = 0;
-    carousel();
-
-    function carousel() {
-        var i;
-        var x = document.getElementsByClassName("mySlides");
-        for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";
-        }
-        myIndex++;
-        if (myIndex > x.length) {myIndex = 1}
-        x[myIndex-1].style.display = "block";
-        setTimeout(carousel, 8000);
-    }
-
 } )( jQuery );
 

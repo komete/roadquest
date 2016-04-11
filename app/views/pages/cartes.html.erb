@@ -1,19 +1,55 @@
 <% provide(:title, 'Cartes') %>
 
 <section>
-  <div class="container">
-    <div class="page-header">
-      <div class="container center">
-        <h3 class="session">Création de cartes</h3>
-      </div>
-    </div>
+  <div class="page-header">
     <div class="container center">
-      <div id="map" class="map">
+      <h3 class="session">Création de cartes</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="center" style="padding-left: 15px">
+        <h4><strong>Exportation .pdf</strong></h4>
+        <hr class="small">
+        <form class="form">
+          <label for="format">Format </label>
+          <select id="format" name="format">
+            <option value="a0">A0 (lent)</option>
+            <option value="a1">A1</option>
+            <option value="a2">A2</option>
+            <option value="a3">A3</option>
+            <option value="a4" selected>A4</option>
+            <option value="a5">A5 (rapide)</option>
+          </select>
+          <label for="resolution">Résolution </label>
+          <select id="resolution" name="resolution">
+            <option value="72">72 dpi (rapide)</option>
+            <option value="150">150 dpi</option>
+            <option value="300">300 dpi (lent)</option>
+          </select>
+        </form>
+        <button id="export-pdf">Exporter en PDF</button>
+      </div>
+      <br>
+      <div class="center" style="padding-left: 15px">
+        <h4><strong>Exportation .png</strong></h4>
+        <hr class="small">
+        <a id="export-png" class="btn btn-default" download="map.png"><i class="fa fa-download"></i> Download PNG</a>
+      </div>
+      <br>
+    </div>
+
+    <div class="col-md-9">
+      <div class="container">
+        <div id="map" class="map">
+        </div>
+      </div>
+      <br>
+      <div class="container center">
+        <button id="geolocation">Geolocalisation</button>
       </div>
     </div>
   </div>
 </section>
-<script type="text/javascript">
 
-</script>
-<%= javascript_include_tag 'cartes.js' %>
+

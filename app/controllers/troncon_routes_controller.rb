@@ -9,8 +9,8 @@ class TronconRoutesController < ApplicationController
   end
 
   def import
-    #@shpfile = "/home/remi/shapes/" + params[:file]
-    @shpfile = "/Users/remiguillaume/Downloads/" + params[:file]
+    @shpfile = "/home/remi/shapes/" + params[:file]
+    #@shpfile = "/Users/remiguillaume/Downloads/" + params[:file]
 
     factory = RGeo::Geographic.spherical_factory(:srid => 4326)
     RGeo::Shapefile::Reader.open(@shpfile, :factory => factory) do |file|

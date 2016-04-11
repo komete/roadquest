@@ -88,13 +88,13 @@ ActiveRecord::Schema.define(version: 20160403140953) do
     t.string   "num_route"
     t.string   "class_adm"
     t.float    "longueur"
-    t.geometry "geometry",              limit: {:srid=>0, :type=>"multi_line_string"}
+    t.geometry "geometry",              limit: {:srid=>4326, :type=>"multi_line_string"}
     t.integer  "route_id"
     t.integer  "point_repere_id"
     t.integer  "point_repere_final_id"
     t.integer  "point_repere_init_id"
-    t.datetime "created_at",                                                           null: false
-    t.datetime "updated_at",                                                           null: false
+    t.datetime "created_at",                                                              null: false
+    t.datetime "updated_at",                                                              null: false
   end
 
   add_index "troncon_routes", ["geometry"], name: "index_troncon_routes_on_geometry", using: :gist
@@ -126,7 +126,7 @@ ActiveRecord::Schema.define(version: 20160403140953) do
   create_table "works", force: :cascade do |t|
     t.string   "type_work"
     t.text     "description"
-    t.date     "debut",            default: '2016-04-06', null: false
+    t.date     "debut",            default: '2016-04-11', null: false
     t.date     "fin"
     t.string   "intervenant"
     t.integer  "troncon_route_id"
