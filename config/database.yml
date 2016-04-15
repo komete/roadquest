@@ -6,8 +6,8 @@ default: &default
   encoding: utf8
   pool: 15
   host: localhost
-  port: 5433
-  #port: 5432
+  #port: 5433
+  port: 5432
   username: roadquest
   password: roadquest
 

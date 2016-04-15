@@ -139,12 +139,13 @@ function init() {
         view: vue,
         interactions: ol.interaction.defaults().extend([select])
     });
+    getJson();
 }
 
 
 $(document).ready(function () {
     init();
-    getJson();
+
     var geolocation = new ol.Geolocation({
         projection: map.getView().getProjection(),
         tracking: true

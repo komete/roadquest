@@ -9,12 +9,12 @@ class TronconRoutesController < ApplicationController
   end
 
   def import
-    @shpfile = "/home/remi/shapes/" + params[:file]
-    #@shpfile = "/Users/remiguillaume/Downloads/" + params[:file]
+    #@shpfile = "/home/remi/shapes/" + params[:file]
+    @shpfile = "/Users/remiguillaume/Downloads/" + params[:file]
 
-    factory = RGeo::Geographic.spherical_factory(:srid => 4326)
-    RGeo::Shapefile::Reader.open(@shpfile, :factory => factory) do |file|
+    RGeo::Shapefile::Reader.open(@shpfile) do |file|
       file.each do |record|
+        puts record.geometry
         # 1: Vérification de la route
         num = record['NUM_ROUTE']
 
@@ -46,6 +46,7 @@ class TronconRoutesController < ApplicationController
       format.html
       format.json do
         feature_collection = TronconRoute.to_feature_collection @troncon_routes
+        #File.open('data.json', 'w') {|file| file.write RGeo::GeoJSON.encode(feature_collection).to_json}
         render json: RGeo::GeoJSON.encode(feature_collection)
       end
     end

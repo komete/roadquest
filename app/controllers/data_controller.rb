@@ -14,8 +14,8 @@ class DataController < ApplicationController
   end
 
   def import
-    @shpfile = "/home/remi/shapes/" + params[:file]
-    #@shpfile = "/Users/remiguillaume/Downloads/" + params[:file]
+    #@shpfile = "/home/remi/shapes/" + params[:file]
+    @shpfile = "/Users/remiguillaume/Downloads/" + params[:file]
     shape_name = params[:file]
     shape_name =~ /(.*)\.shp/
     table_name = $1.downcase
@@ -28,7 +28,6 @@ class DataController < ApplicationController
 
     ShpFile.open(@shpfile) do |shp|
       shp.fields.each do |field|
-        puts field.type
         if field.name.downcase == 'longueur'
           # Correction errreur d'un shapefile.
           ActiveRecord::Schema.add_column(table_name, field.name.downcase, shp_field_type("F"))
@@ -36,8 +35,8 @@ class DataController < ApplicationController
           ActiveRecord::Schema.add_column(table_name, field.name.downcase, shp_field_type(field.type))
         end
       end
-      #ActiveRecord::Schema.add_column(table_name,"the_geom",shp_geom_type(shp.shp_type))
-      #ActiveRecord::Schema.add_index(table_name,"the_geom",:spatial => true)
+      ActiveRecord::Schema.add_column(table_name,"geometry",shp_geom_type(shp.shp_type))
+      ActiveRecord::Schema.add_index(table_name,"geometry",:using => :gist)
 
       dataTable = Class.new(ActiveRecord::Base) do
         self.table_name = table_name
@@ -55,7 +54,8 @@ class DataController < ApplicationController
             shape_table_record[field.name.downcase] = donnees
           end
         end
-        #shape_table_record.the_geom = shape.geometry
+
+        #shape_table_record.geometry = shape.geometry
         shape_table_record.save
       end
     end
