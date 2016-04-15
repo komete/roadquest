@@ -46,7 +46,7 @@ class TronconRoutesController < ApplicationController
       format.html
       format.json do
         feature_collection = TronconRoute.to_feature_collection @troncon_routes
-        #File.open('data.json', 'w') {|file| file.write RGeo::GeoJSON.encode(feature_collection).to_json}
+        File.open('data.geojson', 'w') {|file| file.write RGeo::GeoJSON.encode(feature_collection).to_json}
         render json: RGeo::GeoJSON.encode(feature_collection)
       end
     end
