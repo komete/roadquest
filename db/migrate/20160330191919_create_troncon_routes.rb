@@ -12,7 +12,7 @@ class CreateTronconRoutes < ActiveRecord::Migration
       t.string :num_route
       t.string :class_adm
       t.float :longueur
-      t.multi_line_string :geometry#, :srid => 4326
+      t.multi_line_string :geometry#, :srid => 2154
       t.references :route, index: true, foreign_key: true
       t.references :point_repere, :point_repere_final
       t.references :point_repere,:point_repere_init

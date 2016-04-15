@@ -1,74 +1,3 @@
-var geojsonObject = {
-    'type': 'FeatureCollection',
-    'crs': {
-        'type': 'name',
-        'properties': {
-            'name': 'EPSG:3857'
-        }
-    },
-    'features': [{
-        'type': 'Feature',
-        'geometry': {
-            'type': 'Point',
-            'coordinates': [0, 0]
-        }
-    }, {
-        'type': 'Feature',
-        'geometry': {
-            'type': 'LineString',
-            'coordinates': [[4e6, -2e6], [8e6, 2e6]]
-        }
-    }, {
-        'type': 'Feature',
-        'geometry': {
-            'type': 'LineString',
-            'coordinates': [[4e6, 2e6], [8e6, -2e6]]
-        }
-    }, {
-        'type': 'Feature',
-        'geometry': {
-            'type': 'Polygon',
-            'coordinates': [[[-5e6, -1e6], [-4e6, 1e6], [-3e6, -1e6]]]
-        }
-    }, {
-        'type': 'Feature',
-        'geometry': {
-            'type': 'MultiLineString',
-            'coordinates': [
-                [[-1e6, -7.5e5], [-1e6, 7.5e5]],
-                [[1e6, -7.5e5], [1e6, 7.5e5]],
-                [[-7.5e5, -1e6], [7.5e5, -1e6]],
-                [[-7.5e5, 1e6], [7.5e5, 1e6]]
-            ]
-        }
-    }, {
-        'type': 'Feature',
-        'geometry': {
-            'type': 'MultiPolygon',
-            'coordinates': [
-                [[[-5e6, 6e6], [-5e6, 8e6], [-3e6, 8e6], [-3e6, 6e6]]],
-                [[[-2e6, 6e6], [-2e6, 8e6], [0, 8e6], [0, 6e6]]],
-                [[[1e6, 6e6], [1e6, 8e6], [3e6, 8e6], [3e6, 6e6]]]
-            ]
-        }
-    }, {
-        'type': 'Feature',
-        'geometry': {
-            'type': 'GeometryCollection',
-            'geometries': [{
-                'type': 'LineString',
-                'coordinates': [[-5e6, -5e6], [0, -5e6]]
-            }, {
-                'type': 'Point',
-                'coordinates': [4e6, -5e6]
-            }, {
-                'type': 'Polygon',
-                'coordinates': [[[1e6, -6e6], [2e6, -4e6], [3e6, -6e6]]]
-            }]
-        }
-    }]
-};
-
 /* Export PDF constantes */
 var dimensions = {
     a0: [1189, 841],
@@ -92,10 +21,8 @@ function getJson() {
 }
 function geoJsonLayer(data) {
     var src = data;
-    var crs = {'type': 'name', 'properties': {'name': 'EPSG:3857'}};
+    var crs = {'type': 'name', 'properties': {'name': 'EPSG:2154'}};
     src.crs = crs;
-    //console.log(geojsonObject);
-    console.log(src);
     var vectorSource = new ol.source.Vector({
         features: (new ol.format.GeoJSON()).readFeatures(src)
     });
@@ -114,18 +41,26 @@ function init() {
         visible: true,
         name: 'mapquest'
     });
+    /* Projection */
+    var extent = [99127,6049547,1242475,7110624];
+    var projection = new ol.proj.Projection({
+        code: 'EPSG:2154',
+        extent: [-378305.81, 6093283.21, 1212610.74, 7186901.68]
+    });
     /* Vue */
     var vue = new ol.View({
-        center: ol.proj.fromLonLat([2.351, 48.8567]),
+        projection: projection,
+        center: ol.proj.fromLonLat([2.351, 48.8567], projection),
+        extent: extent,
         zoom: 5,
         maxZoom: 18,
         minZoom: 2
     });
     /* Carte */
     var select = new ol.interaction.Select();
+
     map = new ol.Map({
-        //projection: new ol.proj.Projection("EPSG:3857"),
-        //displayProjection: new ol.proj.Projection("EPSG:3857"),
+        //projection: "EPSG:2154",
         renderer: 'canvas',
         layers: [
             mapquest
