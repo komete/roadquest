@@ -9,8 +9,8 @@ class TronconRoutesController < ApplicationController
   end
 
   def import
-    #@shpfile = "/home/remi/shapes/" + params[:file]
-    @shpfile = "/Users/remiguillaume/Downloads/" + params[:file]
+    @shpfile = "/home/remi/shapes/" + params[:file]
+    #g@shpfile = "/Users/remiguillaume/Downloads/" + params[:file]
 
     RGeo::Shapefile::Reader.open(@shpfile) do |file|
       file.each do |record|

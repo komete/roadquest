@@ -14,6 +14,11 @@ var loaded = 0;
 /* Variables */
 var map;
 var mapquest;
+var vue;
+var overlay;
+var select;
+var vectorLayer;
+
 function getJson() {
     var geoJsonLayout =  $.getJSON('troncon_routes.json', function (data) {
         geoJsonLayer(data);
@@ -26,7 +31,7 @@ function geoJsonLayer(data) {
     var vectorSource = new ol.source.Vector({
         features: (new ol.format.GeoJSON()).readFeatures(src)
     });
-    var vectorLayer = new ol.layer.Vector({
+    vectorLayer = new ol.layer.Vector({
         source: vectorSource,
         visible: true,
         name: 'troncons'
@@ -34,6 +39,22 @@ function geoJsonLayer(data) {
     map.addLayer(vectorLayer);
 }
 function init() {
+
+    var container = document.getElementById('popup');
+    var content = document.getElementById('popup-content');
+    var closer = document.getElementById('popup-closer');
+    closer.onclick = function() {
+        overlay.setPosition(undefined);
+        closer.blur();
+        return false;
+    };
+    overlay = new ol.Overlay(/** @type {olx.OverlayOptions} */ ({
+        element: container,
+        autoPan: true,
+        autoPanAnimation: {
+            duration: 250
+        }
+    }));
 
     /* Layer de base */
     mapquest = new ol.layer.Tile({
@@ -48,7 +69,7 @@ function init() {
         extent: [-378305.81, 6093283.21, 1212610.74, 7186901.68]
     });
     /* Vue */
-    var vue = new ol.View({
+    vue = new ol.View({
         projection: projection,
         center: ol.proj.fromLonLat([2.351, 48.8567], projection),
         extent: extent,
@@ -56,8 +77,11 @@ function init() {
         maxZoom: 18,
         minZoom: 2
     });
+
     /* Carte */
-    var select = new ol.interaction.Select();
+    select = new ol.interaction.Select({
+        condition: ol.events.condition.click
+    });
 
     map = new ol.Map({
         //projection: "EPSG:2154",
@@ -65,6 +89,7 @@ function init() {
         layers: [
             mapquest
         ],
+        overlays: [overlay],
         target: 'map',
         controls: ol.control.defaults().extend([
             new ol.control.ScaleLine(),
@@ -75,6 +100,26 @@ function init() {
         interactions: ol.interaction.defaults().extend([select])
     });
     getJson();
+
+    map.on('singleclick', function(evt) {
+        var coordinate = evt.coordinate;
+        var elem = select.getFeatures();
+        var feature = elem.item(0);
+        var resp = vectorLayer.getSource().getFeatureById(feature.getId()).getProperties()['num_route'];
+
+        content.innerHTML = '<p>Numéro de route: '+ resp +'</p>';
+        overlay.setPosition(coordinate);
+    });
+    map.on('pointermove', function(evt) {
+        if (evt.dragging) {
+            return;
+        }
+        var pixel = map.getEventPixel(evt.originalEvent);
+        var hit = map.forEachLayerAtPixel(pixel, function(layer) {
+            return true;
+        });
+        map.getTargetElement().style.cursor = hit ? 'pointer' : '';
+    });
 }
 
 
@@ -175,5 +220,6 @@ $(document).ready(function () {
         });
         map.renderSync();
     }, false);
+
 });
 

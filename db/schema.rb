@@ -126,7 +126,7 @@ ActiveRecord::Schema.define(version: 20160403140953) do
   create_table "works", force: :cascade do |t|
     t.string   "type_work"
     t.text     "description"
-    t.date     "debut",            default: '2016-04-15', null: false
+    t.date     "debut",            default: '2016-04-18', null: false
     t.date     "fin"
     t.string   "intervenant"
     t.integer  "troncon_route_id"
