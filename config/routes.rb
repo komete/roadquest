@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   post 'troncon_routes/import' => 'troncon_routes#import'
   get 'marquages/new'
   get 'troncon_routes/travaux/:id' => 'troncon_routes#show_travaux'
+  get 'troncon_routes/search' => 'troncon_routes#search'
+
   resources :works
   resources :produits, only: [:show, :create, :new]
   resources :marquages

@@ -65,6 +65,16 @@ class TronconRoutesController < ApplicationController
 
   end
 
+  def search
+    @troncon_routes = TronconRoute.where([params[:param]+" = ?", params[:value]])
+    if @troncon_routes.size == 1
+      feature = @troncon_routes.to_feature
+      render json: RGeo::GeoJSON.encode(feature)
+    else
+      feature_collection = TronconRoute.to_feature_collection @troncon_routes unless @troncon_routes.empty?
+      render json: RGeo::GeoJSON.encode(feature_collection)
+    end
+  end
   :private
 
   def set_troncon_route

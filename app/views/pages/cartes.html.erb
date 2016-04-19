@@ -7,7 +7,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
       <div class="center" style="padding-left: 15px">
         <h4><strong>Exportation .pdf</strong></h4>
         <hr class="small">
@@ -39,7 +39,7 @@
       <br>
     </div>
 
-    <div class="col-md-9">
+    <div class="col-md-6">
       <div class="container">
         <div id="map" class="map">
           <div id="popup" class="ol-popup">
@@ -52,6 +52,19 @@
       <div class="container center">
         <button id="geolocation">Geolocalisation</button>
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="container">
+      <div class="col-md-5"></div>
+      <div class="col-md-2">
+        <label for="critere">Critère de recherche:</label>
+        <input type="text" name="critere" id="critere" class="form-control">
+        <label for="valeur">Valeur:</label>
+        <input type="text" name="valeur" id="valeur" class="form-control">
+        <button type="submit" id="recherche" value="Rechercher" class="btn btn-default" onclick="search()">go !</button>
+      </div>
+      <div class="col-md-5"></div>
     </div>
   </div>
 </section>

@@ -49,4 +49,5 @@ class TronconRoute < ActiveRecord::Base
             format: { with: VALID_NUM_REGEX }
   validates :class_adm, presence:true
   validates :longueur, presence:true
+
 end
