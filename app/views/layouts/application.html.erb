@@ -9,8 +9,10 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/t/dt/jq-2.2.0,dt-1.10.11/datatables.min.css"/>
   <script type="text/javascript" src="https://cdn.datatables.net/t/dt/jq-2.2.0,dt-1.10.11/datatables.min.js"></script>
   <link rel="stylesheet" href="http://openlayers.org/en/v3.15.1/css/ol.css" type="text/css">
-  <script src="http://openlayers.org/en/v3.15.1/build/ol.js"></script>
   <script src="http://mrrio.github.io/jsPDF/dist/jspdf.min.js"></script>
+  <script src="http://openlayers.org/en/v3.15.1/build/ol.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.6/proj4.js"></script>
+  <script src="https://epsg.io/2154.js"></script>
   <%= csrf_meta_tags %>
   <%= favicon_link_tag 'logo.JPG.ico' %>
 </head>
@@ -21,6 +23,7 @@
   <% flash.each do |message_type, message| %>
       <div class="alert alert-<%= message_type %>"><%= message %></div>
   <% end %>
+  <div id="message-erreur" class="alert alert-danger" style="display: none"></div>
 
   <%= yield %>
 
