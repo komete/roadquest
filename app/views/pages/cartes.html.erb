@@ -50,7 +50,7 @@
       </div>
       <br>
       <div class="container center">
-        <button id="geolocation">Geolocalisation</button>
+        <!--<button id="geolocation">Geolocalisation</button>-->
       </div>
     </div>
   </div>
@@ -59,9 +59,57 @@
       <div class="col-md-5"></div>
       <div class="col-md-2">
         <label for="critere">Critère de recherche:</label>
-        <input type="text" name="critere" id="critere" class="form-control">
+        <select name="critere" id="critere" class="foo">
+          <option value="num_route" selected>Numéro de route</option>
+          <option value="vocation">Vocation</option>
+          <option value="nb_chausse">Nombre de chaussées</option>
+          <option value="nb_voies">Nombre de voies</option>
+          <option value="etat">État</option>
+          <option value="acces">Accès</option>
+          <option value="sens">Sens</option>
+          <option value="class_adm">Classe administrative</option>
+        </select>
         <label for="valeur">Valeur:</label>
-        <input type="text" name="valeur" id="valeur" class="form-control">
+        <select id="valeur-num_route" name="valeur-num_route" style="display: block">
+          <% @num_route.each do |num| %>
+            <option value="<%= num.num_route %>"><%= num.num_route %></option>
+          <% end %>
+        </select>
+        <select id="valeur-vocation" name="valeur-vocation" style="display: none">
+          <% @vocation.each do |num| %>
+              <option value="<%= num.vocation %>"><%= num.vocation %></option>
+          <% end %>
+        </select>
+        <select id="valeur-nb_chausse" name="valeur-nb_chausse" style="display: none">
+          <% @nb_chausse.each do |num| %>
+              <option value="<%= num.nb_chausse %>"><%= num.nb_chausse %></option>
+          <% end %>
+        </select>
+        <select id="valeur-nb_voies" name="valeur-nb_voies" style="display: none">
+          <% @nb_voies.each do |num| %>
+              <option value="<%= num.nb_voies %>"><%= num.nb_voies %></option>
+          <% end %>
+        </select>
+        <select id="valeur-etat" name="valeur-etat" style="display: none">
+          <% @etat.each do |num| %>
+              <option value="<%= num.etat %>"><%= num.etat %></option>
+          <% end %>
+        </select>
+        <select id="valeur-acces" name="valeur-acces" style="display: none">
+          <% @acces.each do |num| %>
+              <option value="<%= num.acces %>"><%= num.acces %></option>
+          <% end %>
+        </select>
+        <select id="valeur-sens" name="valeur-sens" style="display: none">
+          <% @sens.each do |num| %>
+              <option value="<%= num.sens %>"><%= num.sens %></option>
+          <% end %>
+        </select>
+        <select id="valeur-class_adm" name="valeur-class_adm" style="display: none">
+          <% @class_adm.each do |num| %>
+              <option value="<%= num.class_adm %>"><%= num.class_adm %></option>
+          <% end %>
+        </select>
         <button type="submit" id="recherche" value="Rechercher" class="btn btn-default" onclick="search()">go !</button>
       </div>
       <div class="col-md-5"></div>
@@ -89,6 +137,8 @@
   var overlay;
   var select;
   var vectorLayer;
+  var old_selected = "num_route";
+  var is_selected = "num_route";
 
   function message_erreur(message) {
     $('#message-erreur').slideDown(function() {
@@ -105,7 +155,7 @@
   }
   function search() {
     var param = $('#critere').val();
-    var value = $('#valeur').val();
+    var value = $("#valeur-"+is_selected).val();
     if(param == '' || value == '') {
       message_erreur("Erreur: recherche vide!");
     }else{
@@ -122,7 +172,6 @@
       layers.forEach(function (item) {
         var properties = item.getProperties();
         if (properties.name === 'troncons') {
-          console.log("yes");
           map.removeLayer(item);
         }
       });
@@ -136,7 +185,13 @@
       vectorLayer = new ol.layer.Vector({
         source: vectorSource,
         visible: true,
-        name: 'troncons'
+        name: 'troncons',
+        style: new ol.style.Style({
+          stroke: new ol.style.Stroke({
+            color: 'black',
+            width: 1
+          })
+        })
       });
       map.addLayer(vectorLayer);
     }
@@ -167,10 +222,8 @@
     });
     /* Projection */
     var extent = [99127, 6049547, 1242475, 7110624];
-    //var extent = [-9.6200, 41.1800, 10.3000, 51.5400];
     var projection = new ol.proj.Projection({
       code: 'EPSG:2154',
-      //extent: [-378305.81, 6093283.21, 1212610.74, 7186901.68]
       extent: [-357823.2365, 6037008.6939, 1313632.3628, 7230727.3772]
     });
     /* Vue */
@@ -229,6 +282,26 @@
 
   $(document).ready(function () {
     init();
+
+    /* Form helper */
+
+    $('#critere').click(function(){
+      is_selected = $( "select.foo option:selected").val();
+      var old= document.getElementById("valeur-"+old_selected);
+      old.style.display = 'none';
+      var select = document.getElementById("valeur-"+is_selected);
+      select.style.display = 'block';
+      old_selected = is_selected;
+    });
+    $('#critere').change(function(){
+      is_selected = $( "select.foo option:selected").val();
+      var old= document.getElementById("valeur-"+old_selected);
+      old.style.display = 'none';
+      var select = document.getElementById("valeur-"+is_selected);
+      select.style.display = 'block';
+      old_selected = is_selected;
+    });
+    /* end form */
 
     var geolocation = new ol.Geolocation({
       projection: map.getView().getProjection(),
