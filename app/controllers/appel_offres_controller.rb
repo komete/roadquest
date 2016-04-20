@@ -1,7 +1,7 @@
 class AppelOffresController < ApplicationController
   all_application_helpers
 
-  before_action :logged_user, only: [:new, :create, :edit, :update]
+  before_action :logged_user, only: [:new, :create, :edit, :update, :to_assign]
 
   def index
     @appels = AppelOffre.all
@@ -27,7 +27,14 @@ class AppelOffresController < ApplicationController
 
   end
 
+  def to_assign
+
+  end
+
   :private
 
+  def appel_params
+    params.require(:appel_offre).permit(:nom, :prenom, :email, :poste, :telephone, :codeEmploye, :username, :password, :password_confirmation)
+  end
 
 end

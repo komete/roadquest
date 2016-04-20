@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'appel_offres/index'
-
   root 'pages#acceuil'
   get 'acceuil'      => 'pages#acceuil'
   get 'cartes'       => 'pages#cartes'
@@ -24,6 +22,7 @@ Rails.application.routes.draw do
   get 'troncon_routes/travaux/:id' => 'troncon_routes#show_travaux'
   get 'troncon_routes/search' => 'troncon_routes#search'
 
+  resources :appel_offres, only: [:new, :create, :edit, :update, :index, :show, :to_assign]
   resources :works
   resources :produits, only: [:show, :create, :new]
   resources :marquages
