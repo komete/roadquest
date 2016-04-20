@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'appel_offres/index'
+
   root 'pages#acceuil'
   get 'acceuil'      => 'pages#acceuil'
   get 'cartes'       => 'pages#cartes'
