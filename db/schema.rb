@@ -11,11 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160403140953) do
+ActiveRecord::Schema.define(version: 20160420181443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
+
+  create_table "appel_offres", force: :cascade do |t|
+    t.date     "date",            default: '2016-04-20', null: false
+    t.float    "budget"
+    t.string   "periode"
+    t.text     "description"
+    t.string   "document_annexe"
+    t.boolean  "assigned",        default: true,         null: false
+    t.integer  "entrepreneur_id"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
+  add_index "appel_offres", ["entrepreneur_id", "created_at"], name: "index_appel_offres_on_entrepreneur_id_and_created_at", using: :btree
+  add_index "appel_offres", ["entrepreneur_id"], name: "index_appel_offres_on_entrepreneur_id", using: :btree
 
   create_table "entrepreneurs", force: :cascade do |t|
     t.string   "ref_entreprise"
@@ -137,6 +152,7 @@ ActiveRecord::Schema.define(version: 20160403140953) do
   add_index "works", ["troncon_route_id", "created_at"], name: "index_works_on_troncon_route_id_and_created_at", using: :btree
   add_index "works", ["troncon_route_id"], name: "index_works_on_troncon_route_id", using: :btree
 
+  add_foreign_key "appel_offres", "entrepreneurs"
   add_foreign_key "marquages", "works"
   add_foreign_key "produits", "marquages"
   add_foreign_key "troncon_routes", "routes"

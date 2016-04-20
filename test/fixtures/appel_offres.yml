@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2016-04-20
+  budget: 
+  periode: MyString
+  description: MyText
+  document_annexe: MyString
+  assigned: false
+
+two:
+  date: 2016-04-20
+  budget: 
+  periode: MyString
+  description: MyText
+  document_annexe: MyString
+  assigned: false

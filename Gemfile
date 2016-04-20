@@ -26,6 +26,8 @@ gem 'rgeo-shapefile'
 gem 'rgeo-geojson'
 gem 'activerecord-postgis-adapter'
 
+gem 'carrierwave',  '0.11.0'
+
 gem 'pg'
 # React
 source 'https://rails-assets.org' do
