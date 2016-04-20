@@ -51,6 +51,7 @@
       <br>
       <div class="container center">
         <!--<button id="geolocation">Geolocalisation</button>-->
+        <button id="reset" class="btn btn-default" onclick="getJson()">Tout afficher</button>
       </div>
     </div>
   </div>
@@ -140,6 +141,22 @@
   var old_selected = "num_route";
   var is_selected = "num_route";
 
+  var icon_travaux = new ol.style.Style({
+    image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+      anchor: [0.5, 46],
+      anchorXUnits: 'fraction',
+      anchorYUnits: 'pixels',
+      src: '/home/remi/Google\ Drive/Projets/ProgWeb/Rails/INM5151v2/INM5151/public/icone_travaux.png'
+    }))
+  });
+
+  var line_style = new ol.style.Style({
+    stroke: new ol.style.Stroke({
+      color: 'black',
+      width: 1
+    })
+  });
+
   function message_erreur(message) {
     $('#message-erreur').slideDown(function() {
       this.innerHTML = '<p>'+ message +'</p>';
@@ -186,12 +203,7 @@
         source: vectorSource,
         visible: true,
         name: 'troncons',
-        style: new ol.style.Style({
-          stroke: new ol.style.Stroke({
-            color: 'black',
-            width: 1
-          })
-        })
+        style: line_style
       });
       map.addLayer(vectorLayer);
     }
