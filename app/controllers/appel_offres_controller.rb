@@ -16,7 +16,7 @@ class AppelOffresController < ApplicationController
   end
 
   def create
-
+    @appel = AppelOffre.new(appel_params)
   end
 
   def edit
@@ -24,7 +24,7 @@ class AppelOffresController < ApplicationController
   end
 
   def update
-
+    @appel.update_attributes(appel_params)
   end
 
   def to_assign
@@ -34,7 +34,7 @@ class AppelOffresController < ApplicationController
   :private
 
   def appel_params
-    params.require(:appel_offre).permit(:nom, :prenom, :email, :poste, :telephone, :codeEmploye, :username, :password, :password_confirmation)
+    params.require(:appel_offre).permit(:budget, :periode, :description, :document_annexe)
   end
 
 end

@@ -1,0 +1,46 @@
+<% provide(:title, 'Offre') %>
+<section>
+  <div class="container">
+    <div class="page-header">
+      <div class="container center">
+        <h3 class="session">Visualisation</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+
+        <p id="notice"><%= notice %></p>
+
+        <p>
+          <strong>Date:</strong>
+          <%= @appel.date %>
+        </p>
+
+        <p>
+          <strong>Budget:</strong>
+          <%= @appel.budget %>
+        </p>
+
+        <p>
+          <strong>Déscription:</strong>
+          <%= @appel.description %>
+        </p>
+
+        <p>
+          <strong>Période:</strong>
+          <%= @appel.periode %>
+        </p>
+
+        <p>
+          <strong>Document:</strong>
+          <%= link_to 'Document', @appel.document_annexe_url %>
+        </p>
+        <%= link_to 'Retour', appel_offres_path %>
+        <% if logged_cadre%>
+          | <%= link_to 'Éditer l\'offre', edit_appel_offre_path %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+

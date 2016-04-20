@@ -4,7 +4,7 @@
     <li><%= link_to "À propos", acceuil_path %></li>
     <li><%= link_to "Cartographie", cartes_path%></li>
     <li><%= link_to "Faire une recherche", troncon_routes_path %></li>
-
+    <li><%= link_to "Appels d'offres", appel_offres_path %></li>
     <% if logged_in? %>
         <li><%= link_to "Se déconnecter", logout_path, method: :delete %></li>
     <% else %>

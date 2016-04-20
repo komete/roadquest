@@ -46,6 +46,15 @@ module SessionsHelper
     end
   end
 
+  def logged_cadre
+    user = current_user
+    unless logged_in? && (user.poste == '1'|| user.administrateur)
+      flash[:danger] = "Vous n'avez pas l'authorisation d'être sur cette page !"
+      redirect_to root_path
+    end
+    true
+  end
+
   def logged_admin
     user = current_user
     unless logged_in? && user.administrateur

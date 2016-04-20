@@ -1,0 +1,32 @@
+<% provide(:title, 'Offre') %>
+<section>
+  <div class="container">
+    <div class="page-header">
+      <div class="container center">
+        <h3 class="session">Édition de l'offre</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <%= form_for(@appel) do |f| %>
+
+            <%= render 'shared/error_appel_offres_messages' %>
+
+            <%= f.label "Budget" %>
+            <%= f.text_field :budget, class: 'form-control' %>
+
+            <%= f.label "Période" %>
+            <%= f.text_field :periode, class: 'form-control' %>
+
+            <%= f.label "Déscription" %>
+            <%= f.text_area :description, class: 'form-control' %>
+
+            <%= f.label "Nom d'utilisateur" %>
+            <%= f.file_field :document_annexe, class: 'form-control' %>
+
+            <%= f.submit "Éditer l'offre", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
