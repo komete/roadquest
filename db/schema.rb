@@ -139,18 +139,18 @@ ActiveRecord::Schema.define(version: 20160420181443) do
   end
 
   create_table "works", force: :cascade do |t|
-    t.string   "type_work"
-    t.text     "description"
-    t.date     "debut",            default: '2016-04-21', null: false
-    t.date     "fin"
-    t.string   "intervenant"
-    t.point    "geometry"
-    t.integer  "troncon_route_id"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.string    "type_work"
+    t.text      "description"
+    t.date      "debut",                                                                     default: '2016-04-21', null: false
+    t.date      "fin"
+    t.string    "intervenant"
+    t.geography "lonlat",           limit: {:srid=>4326, :type=>"point", :geographic=>true}
+    t.integer   "troncon_route_id"
+    t.datetime  "created_at",                                                                                       null: false
+    t.datetime  "updated_at",                                                                                       null: false
   end
 
-  add_index "works", ["geometry"], name: "index_works_on_geometry", using: :gist
+  add_index "works", ["lonlat"], name: "index_works_on_lonlat", using: :gist
   add_index "works", ["troncon_route_id", "created_at"], name: "index_works_on_troncon_route_id_and_created_at", using: :btree
   add_index "works", ["troncon_route_id"], name: "index_works_on_troncon_route_id", using: :btree
 

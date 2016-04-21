@@ -26,7 +26,7 @@
           <%= @work.debut %>
         </p>
         <% if @work.fin.nil? %>
-            <p>Travaux en cours !</p>
+            <p><strong>Fin: </strong>Travaux en cours !</p>
         <% else %>
           <p>
             <strong>Fin:</strong>
@@ -52,6 +52,7 @@
         <br>
         <%= link_to 'Ajouter marquage',{controller: 'marquages', action: 'new', id: @work}%> |
         <%= link_to 'Éditer', edit_work_path(@work) %> |
+        <%= link_to 'Géolocaliser', {controller: "works", action: "edit_geolocation", id: @work} %> |
         <%= link_to 'Retour', works_path %> |
         <%= link_to 'Retour au tronçon',{controller: 'troncon_routes', action: 'show_travaux', id: @troncon} %>
       </div>

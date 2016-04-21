@@ -58,6 +58,20 @@ class WorksController < ApplicationController
     @work.destroy
   end
 
+  def edit_geolocation
+    @work = Work.find(params[:id])
+  end
+
+  def update_geolocation
+    @work = Work.find(params[:id])
+    @troncon = TronconRoute.find(@work.troncon_route_id)
+    factory = RGeo::Geographic.spherical_factory#(:srid => 2154) #simple_mercator_factory#
+    point = factory.point(params[:lon],params[:lat])
+    @work.to_geolocate(point)
+    flash[:success] = "Géolocalisation terminée"
+    redirect_to controller: 'troncon_routes', action: 'show_travaux', id: @troncon
+  end
+
   private
 
     def set_work

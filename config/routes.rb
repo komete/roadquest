@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   get 'troncon_routes/search' => 'troncon_routes#search'
   get 'appel_offres/assign/:id' => 'appel_offres#assign'
   get 'appel_offres/to_assign/:id' => 'appel_offres#to_assign'
+  get 'works/geolocation/edit/:id'  => 'works#edit_geolocation'
+  post 'works/geolocation/update'  => 'works#update_geolocation'
 
   resources :appel_offres, only: [:new, :create, :edit, :update, :index, :show, :to_assign, :assign]
   resources :works
@@ -31,7 +33,7 @@ Rails.application.routes.draw do
   resources :marquage_lineaires, only: [:show]
   resources :marquage_specialises, only: [:show]
   resources :routes, only: [:index, :show]
-  resources :troncon_routes, only: [:select, :index, :import, :show, :show_travaux]
+  resources :troncon_routes, only: [:select, :index, :import, :show, :show_travaux, :update_geolocation, :edit_geolocation]
   resources :point_reperes
   resources :users, only: [:new, :create, :edit, :update, :destroy]
   resources :account_verifications, only: [:edit]

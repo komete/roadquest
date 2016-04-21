@@ -41,7 +41,11 @@ class UsersController < ApplicationController
       if @user.administrateur?
         redirect_to dashboard_path
       else
-        redirect_to root_path
+        if logged_admin
+          redirect_to dashboard_path
+        else
+          redirect_to root_path
+        end
       end
     else
       render 'edit'
