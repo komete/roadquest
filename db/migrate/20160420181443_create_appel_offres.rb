@@ -6,7 +6,7 @@ class CreateAppelOffres < ActiveRecord::Migration
       t.string :periode
       t.text :description
       t.string :document_annexe
-      t.boolean :assigned , :null => false, :default => true
+      t.boolean :assigned , :null => false, :default => false
       t.references :entrepreneur, index: true, foreign_key: true
       t.timestamps null: false
     end

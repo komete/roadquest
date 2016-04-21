@@ -9,8 +9,15 @@
   </div>
   <div class="content">
     <div class="clear"></div>
-    <h2 align="center">Listing des appels d'offres</h2>
+    <h2 align="center">Portail des appels d'offres</h2>
     <hr class="pageTitle">
+    <% if logged_cadre%>
+      <p class="center">
+        <button class="btn btn-primary">
+          <%= link_to "Créér une offre", new_appel_offre_path, style: "text-decoration: none; color: #fff" %>
+        </button>
+      </p>
+    <% end %>
     <table id="example" class="table table-striped table-bordered" cellspacing="0" width="110%">
       <thead>
       <tr>
@@ -45,7 +52,7 @@
             <% if appel.assigned? %>
               <td><%= appel.entrepreneur_id %></td>
             <% else %>
-               <td><%= appel.assigned %></td>
+               <td>Non attribué</td>
             <% end %>
             <td><%= link_to 'Montrer', appel %></td>
           </tr>
