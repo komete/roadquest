@@ -1,4 +1,7 @@
 class Work < ActiveRecord::Base
+  include Featurable
+  featurable :geometry, [:type_work, :description, :intervenant]
+
   belongs_to :troncon_route
   has_many :marquages
 
