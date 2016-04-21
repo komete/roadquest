@@ -10,11 +10,11 @@ class UsersController < ApplicationController
 
   def create
     if params[:ref_entreprise][:ref_entreprise] &&  params[:ref_entreprise][:ref_entreprise] != ''
-      @user = Entrepreneur.create(:nom => params[:user][:nom], :prenom => params[:user][:prenom], :email => params[:user][:email],
+      @user = Entrepreneur.new(:nom => params[:user][:nom], :prenom => params[:user][:prenom], :email => params[:user][:email],
                                :poste => params[:user][:poste], :telephone => params[:user][:telephone], :codeEmploye => params[:user][:codeEmploye],
                                :username => params[:user][:username], :password => params[:user][:password],
                                :password_confirmation => params[:user][:password_confirmation], :ref_entreprise => params[:ref_entreprise][:ref_entreprise])
-
+      @user.save
       @user.send_verification_email
       flash[:info] = "Un email a été envoyé aux administrateurs pour la validation de votre compte."
       redirect_to root_path

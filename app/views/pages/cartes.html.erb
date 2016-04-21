@@ -137,6 +137,7 @@
   var overlay;
   var select;
   var vectorLayer;
+  var vectorLayerWorks;
   var old_selected = "num_route";
   var is_selected = "num_route";
 
@@ -167,6 +168,11 @@
   function getJson() {
     var geoJsonLayout = $.getJSON('troncon_routes.json', function (data) {
       geoJsonLayer(data);
+    });
+  }
+  function getTravaux() {
+    var geoJsonLayout = $.getJSON('works.json', function (data) {
+      geoJsonLayerWork(data);
     });
   }
   function search() {
@@ -206,6 +212,22 @@
       });
       map.addLayer(vectorLayer);
     }
+  }
+  function geoJsonLayerWork(data) {
+    var src = data;
+    var crs = {'type': 'name', 'properties': {'name': 'EPSG:2154'}};
+    src.crs = crs;
+    var vectorSource = new ol.source.Vector({
+      features: (new ol.format.GeoJSON()).readFeatures(src)
+    });
+    vectorLayerWorks = new ol.layer.Vector({
+      source: vectorSource,
+      visible: true,
+      name: 'works',
+      style: icon_travaux
+    });
+    map.addLayer(vectorLayerWorks);
+
   }
   function init() {
 
@@ -268,6 +290,7 @@
       interactions: ol.interaction.defaults().extend([select])
     });
     getJson();
+    getTravaux();
 
     map.on('singleclick', function (evt) {
       var coordinate = evt.coordinate;

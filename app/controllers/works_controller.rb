@@ -7,6 +7,13 @@ class WorksController < ApplicationController
 
   def index
     @works = Work.all
+    respond_to do |format|
+      format.html
+      format.json do
+        feature_collection = Work.to_feature_collection @works
+        render json: RGeo::GeoJSON.encode(feature_collection)
+      end
+    end
   end
 
   def show

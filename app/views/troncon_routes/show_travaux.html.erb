@@ -26,7 +26,10 @@
         </p>
 
             <% if travaux.fin.nil? %>
-                <p>Travaux en cours !</p>
+                <p>
+                  <strong>Date de fin:</strong>
+                  Travaux en cours !
+                </p>
             <% else %>
                 <p>
                   <strong>Date de fin:</strong>
@@ -37,8 +40,11 @@
               <strong>Itervenant:</strong>
               <%= travaux.intervenant %>
             </p>
-            <br>
+            <p>
+              <%= link_to 'Détails', {controller: "works", action: "show", id: travaux.id}%>
+            </p>
         <% end %>
+        <br>
         <%= link_to 'Retour', troncon_route_path %>
       </div>
     </div>
