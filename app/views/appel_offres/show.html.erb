@@ -34,7 +34,7 @@
         <% if @appel.assigned? %>
             <p>
               <strong>Entrepreneur:</strong>
-              <%= @appel.entrepreneur_id %>
+              <%= @entrepreneur.ref_entreprise %>
             </p>
         <% else %>
             <p>
@@ -48,7 +48,11 @@
         </p>
         <%= link_to 'Retour', appel_offres_path %>
         <% if logged_cadre%>
-          | <%= link_to 'Éditer l\'offre', edit_appel_offre_path %>
+            <% if @appel.assigned? %>
+                | <%= link_to 'Éditer l\'offre', edit_appel_offre_path %>
+            <% else %>
+                |<%= link_to 'Assigner l\'offre', {controller: "appel_offres", action: "assign", id: @appel} %>
+            <% end %>
         <% end %>
       </div>
     </div>

@@ -1,7 +1,7 @@
 class AppelOffresController < ApplicationController
   all_application_helpers
 
-  before_action :logged_user, only: [:new, :create, :edit, :update, :to_assign]
+  before_action :logged_user, only: [:new, :create, :edit, :update, :to_assign, :assign]
 
   def index
     @appels = AppelOffre.all
@@ -9,6 +9,9 @@ class AppelOffresController < ApplicationController
 
   def show
     @appel = AppelOffre.find(params[:id])
+    if @appel.entrepreneur_id
+      @entrepreneur = Entrepreneur.find(@appel.entrepreneur_id)
+    end
   end
 
   def new
@@ -27,9 +30,6 @@ class AppelOffresController < ApplicationController
 
   def edit
     @appel = AppelOffre.find(params[:id])
-    if @appel.entrepreneur_id
-      @entrepreneur = Entrepreneur.find(@appel.entrepreneur_id)
-    end
   end
 
   def update
@@ -39,8 +39,16 @@ class AppelOffresController < ApplicationController
     redirect_to appel_offre_path
   end
 
-  def to_assign
+  def assign
+    @appel = AppelOffre.find(params[:id])
+    @entrepreneurs = Entrepreneur.all
+  end
 
+  def to_assign
+    @appel = AppelOffre.find(params[:id])
+    @appel.is_now_assigned params[:entrepreneur_id]
+    flash[:success] = "Appel d\'offre attribué'"
+    redirect_to appel_offre_path
   end
 
   :private

@@ -5,4 +5,9 @@ class AppelOffre < ActiveRecord::Base
   validates :budget, presence: true
   validates :periode, presence: true
   validates :document_annexe, presence: true
+
+  def is_now_assigned(id)
+    update_attribute(:entrepreneur_id, id)
+    update_attribute(:assigned, true)
+  end
 end

@@ -21,8 +21,10 @@ Rails.application.routes.draw do
   get 'marquages/new'
   get 'troncon_routes/travaux/:id' => 'troncon_routes#show_travaux'
   get 'troncon_routes/search' => 'troncon_routes#search'
+  get 'appel_offres/assign/:id' => 'appel_offres#assign'
+  get 'appel_offres/to_assign/:id' => 'appel_offres#to_assign'
 
-  resources :appel_offres, only: [:new, :create, :edit, :update, :index, :show, :to_assign]
+  resources :appel_offres, only: [:new, :create, :edit, :update, :index, :show, :to_assign, :assign]
   resources :works
   resources :produits, only: [:show, :create, :new]
   resources :marquages
