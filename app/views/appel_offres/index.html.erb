@@ -50,7 +50,7 @@
             <td><%= appel.periode %></td>
             <td><%= link_to'Récapitulatif', appel.document_annexe_url %></td>
             <% if appel.assigned? %>
-              <td><%= appel.entrepreneur_id %></td>
+              <td><%= Entrepreneur.find(appel.entrepreneur_id).ref_entreprise %></td>
             <% else %>
                <td>Non attribué</td>
             <% end %>
