@@ -18,9 +18,11 @@ class PagesController < ApplicationController
     @sens = TronconRoute.select(:sens).distinct
     @class_adm = TronconRoute.select(:class_adm).distinct
   end
+
   def offres
 
   end
+
   def recherches
 
   end

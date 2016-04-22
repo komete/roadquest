@@ -47,7 +47,7 @@ class AppelOffresController < ApplicationController
   def to_assign
     @appel = AppelOffre.find(params[:id])
     @appel.is_now_assigned params[:entrepreneur_id]
-    flash[:success] = "Appel d\'offre attribué'"
+    flash[:success] = "Appel d\'offre attribué"
     redirect_to appel_offre_path
   end
 
