@@ -146,7 +146,7 @@
       anchor: [0.5, 46],
       anchorXUnits: 'fraction',
       anchorYUnits: 'pixels',
-      src: 'icone_travaux.png'
+      src: 'icone_travaux32x32.png'
     }))
   });
 
@@ -299,6 +299,17 @@
 
       content.innerHTML = '<p>Numéro de route: ' + resp + '</p>';
       overlay.setPosition(coordinate);
+    });
+    map.on('dblclick', function (evt) {
+      var coordinate = evt.coordinate;
+      var elem = select.getFeatures();
+      var feature = elem.item(0);
+      var resp = vectorLayerWorks.getSource().getFeatureById(feature.getId()).getProperties();
+
+      content.innerHTML = '<p>Type de travaux: ' + resp['type_work'] + '</p>';
+      content.innerHTML += '<p>Déscription: ' + resp['description'] + '</p>';
+      content.innerHTML += '<p>Intervenenant: ' + resp['intervenant'] + '</p>';
+          overlay.setPosition(coordinate);
     });
     map.on('pointermove', function (evt) {
       if (evt.dragging) {
