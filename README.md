@@ -28,6 +28,6 @@
    * app/models: Contient les différents modèles de l'application.
    * app/views: Contient les vues de l'application rangées dans des sous-dossiers portant le nom du controller.
    * db/ : Contient les fichiers de migration et de schématisation de la base de données.
-    
+   * test/ : Tests classés par types (ex: Controlleur, Model, Vue, ...). 
     
 ------------------------------------------------------------------------
